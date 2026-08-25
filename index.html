@@ -4,6 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script>
+        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(w){w.unregister()})});}
+        if('caches' in window){caches.keys().then(function(n){n.forEach(function(k){caches.delete(k)})});}
+        localStorage.removeItem('romantic_chat_v2');
+        localStorage.removeItem('romantic_chat_v3');
+        localStorage.removeItem('romantic_chat_v4');
+        localStorage.removeItem('ahmed_shahd_v5');
+    </script>
     <title>نبض القلب 💓</title>
     <meta name="theme-color" content="#e11d48">
     <!-- iOS PWA Meta Tags -->
@@ -1460,13 +1468,8 @@
         root.render(<LoveWebsite />);
     </script>
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(regs => {
-                regs.forEach(r => r.unregister());
-            });
-            caches.keys().then(names => names.forEach(n => caches.delete(n)));
-            navigator.serviceWorker.register('/shahd-and-ahmed/sw2.js').catch(() => {});
-        }
+        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(w){w.unregister()})});}
+        if('caches' in window){caches.keys().then(function(n){n.forEach(function(k){caches.delete(k)})});}
     </script>
 </body>
 
