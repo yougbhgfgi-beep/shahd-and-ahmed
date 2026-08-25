@@ -827,64 +827,36 @@
 
         function MiniMessages() {
             const [isOpen, setIsOpen] = useState(false);
-            const shareUrl = "https://yougbhgfgi-beep.github.io/shahd-and-ahmed/";
-            const shareText = "يا شهد.. أنتِ مش بس حبيبتي، أنتِ كل دنيتي وأماني. ❤️ بحبك فوق ما تتخيلي.. إلى ما لا نهاية ♾️";
-
-            const shareMessages = [
-                { platform: "واتساب", icon: "💬", color: "from-green-500 to-green-700", action: () => window.open(`https://wa.me/?text=${encodeURIComponent(shareText + "\n\n" + shareUrl)}`, '_blank') },
-                { platform: "فيسبوك", icon: "📘", color: "from-blue-500 to-blue-700", action: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`, '_blank') },
-                { platform: "تويتر", icon: "🐦", color: "from-sky-400 to-sky-600", action: () => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank') },
-                { platform: "تيليجرام", icon: "✈️", color: "from-blue-400 to-blue-600", action: () => window.open(`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`, '_blank') },
-                { platform: "نسخ اللينك", icon: "🔗", color: "from-slate-500 to-slate-700", action: () => { navigator.clipboard.writeText(shareUrl); alert("تم نسخ اللينك! ❤️"); } }
+            const [index, setIndex] = useState(0);
+            const messages = [
+                "أنتِ مش بس حبيبتي، أنتِ كل دنيتي 🌍❤️",
+                "وجودك بيطمني وبيخليني أحس إن الدنيا لسة بخير ✨",
+                "نفسي الأيام تقف بيا وأنتِ في حضني يا شهد 🥺",
+                "أنتِ أحلى صدفة حصلت في عمري كله 💍",
+                "بحبك قد السما وكل حاجة فيها 🌌",
+                "كل ما أشوفك بنسى كل حاجة في الدنيا.. أنتِ بس اللي مهم 🥰",
+                "قلبي بينبض باسمك.. أنتِ حبيبتي ونور عيني ❤️"
             ];
-
+            
             return (
                 <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[110]" dir="rtl">
                     {!isOpen ? (
-                        <div onClick={() => setIsOpen(true)} className="relative w-16 h-16 md:w-20 md:h-20 rounded-full shadow-[0_0_30px_rgba(225,29,72,0.7)] cursor-pointer flex items-center justify-center hover:scale-110 transition-transform border-2 border-white/30 bg-gradient-to-tr from-rose-600 via-pink-500 to-indigo-600 group overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-rose-600/80 via-pink-500/60 to-indigo-600/80 animate-pulse rounded-full"></div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="relative z-10 drop-shadow-lg md:w-9 md:h-9"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-                            <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center text-[10px] font-bold text-slate-900 animate-bounce shadow-lg">✨</div>
+                        <div onClick={() => setIsOpen(true)} className="w-16 h-16 md:w-20 md:h-20 rounded-full shadow-[0_0_20px_rgba(225,29,72,0.6)] cursor-pointer flex items-center justify-center hover:scale-110 transition-transform animate-bounce border-2 border-white/20 overflow-hidden">
+                            <img src="./assets/media/img1.jpeg" alt="رسايل" className="w-full h-full object-cover" />
                         </div>
                     ) : (
-                        <div className="bg-gradient-to-b from-slate-900/98 to-slate-950/98 backdrop-blur-2xl p-6 rounded-3xl border border-rose-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(225,29,72,0.15)] w-[88vw] max-w-sm text-center animate-fade-in relative overflow-hidden">
-                            {/* Decorative background */}
-                            <div className="absolute inset-0 opacity-10">
-                                <div className="absolute top-0 left-0 w-40 h-40 bg-rose-500 rounded-full blur-[80px]"></div>
-                                <div className="absolute bottom-0 right-0 w-32 h-32 bg-indigo-500 rounded-full blur-[60px]"></div>
+                        <div className="bg-slate-900/95 backdrop-blur-xl p-6 rounded-3xl border border-rose-500/50 shadow-[0_15px_50px_rgba(0,0,0,0.8)] w-[85vw] max-w-sm text-center animate-fade-in relative">
+                            <button onClick={() => setIsOpen(false)} className="absolute top-4 left-4 text-slate-400 hover:text-white text-3xl font-bold">&times;</button>
+                            <div className="text-5xl mb-4 ml-2 animate-pulse">💌</div>
+                            <h4 className="text-rose-400 font-bold mb-6 font-script text-2xl drop-shadow-md">رسايل من أحمد ❤️</h4>
+                            <div className="flex justify-between items-center bg-slate-800/80 p-4 rounded-xl border border-slate-700 shadow-inner">
+                                <button onClick={() => setIndex((index + 1) % messages.length)} className="text-rose-500 hover:text-rose-300 font-bold text-3xl px-2">&#10095;</button>
+                                <p className="text-slate-200 font-medium min-h-[80px] flex items-center justify-center leading-relaxed flex-1 px-4 text-lg">
+                                    {messages[index]}
+                                </p>
+                                <button onClick={() => setIndex((index - 1 + messages.length) % messages.length)} className="text-rose-500 hover:text-rose-300 font-bold text-3xl px-2">&#10094;</button>
                             </div>
-
-                            <button onClick={() => setIsOpen(false)} className="absolute top-4 left-4 text-slate-500 hover:text-white text-3xl font-bold z-10 transition-colors">&times;</button>
-                            
-                            <div className="relative z-10">
-                                <div className="text-5xl mb-3 animate-bounce">💌</div>
-                                <h4 className="text-rose-400 font-bold mb-2 font-script text-2xl drop-shadow-md">ابعت لحبيبتك</h4>
-                                <p className="text-slate-400 text-sm mb-6">اختر منصة وابعت اللينك مع كلام حلو 💕</p>
-                                
-                                {/* Preview card */}
-                                <div className="bg-slate-800/60 rounded-2xl p-4 mb-6 border border-slate-700/50 shadow-inner">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <img src="./assets/media/img1.jpeg" alt="preview" className="w-14 h-14 rounded-xl object-cover border-2 border-rose-500/40 shadow-lg" />
-                                        <div className="text-right flex-1 min-w-0">
-                                            <p className="text-rose-300 font-bold text-sm truncate">أحمد ❤️ شهد</p>
-                                            <p className="text-slate-400 text-xs truncate">حبنا أقوى من كل شيء.. إلى ما لا نهاية</p>
-                                        </div>
-                                    </div>
-                                    <p className="text-slate-300 text-sm leading-relaxed text-right">"{shareText.substring(0, 60)}..."</p>
-                                </div>
-                                
-                                {/* Share buttons */}
-                                <div className="grid grid-cols-2 gap-3">
-                                    {shareMessages.map((s, i) => (
-                                        <button key={i} onClick={s.action} className={`bg-gradient-to-r ${s.color} text-white py-3 px-4 rounded-xl font-bold text-sm hover:scale-105 transition-transform shadow-lg flex items-center justify-center gap-2`}>
-                                            <span className="text-lg">{s.icon}</span>
-                                            <span>{s.platform}</span>
-                                        </button>
-                                    ))}
-                                </div>
-
-                                <p className="text-slate-500 text-xs mt-5 tracking-wide">كل منصة بتعرض صورة اللينك مع الكلام ❤️</p>
-                            </div>
+                            <span className="block mt-5 text-slate-400 text-sm font-bold tracking-widest">{index + 1} / {messages.length}</span>
                         </div>
                     )}
                 </div>
@@ -1141,159 +1113,231 @@
         function BotChat() {
             const [isOpen, setIsOpen] = useState(false);
             const [messages, setMessages] = useState(() => {
-                const saved = localStorage.getItem('romantic_chat_v3');
+                const saved = localStorage.getItem('romantic_chat_v4');
                 if (saved) { try { return JSON.parse(saved); } catch(e) {} }
-                return [{ id: 1, text: "أهلاً يا شهد ❤️.. أحمد بيفكر فيكي دلوقتي وعايز يقولك إنك أجمل حاجة في حياته!", sender: "bot", time: new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'}) }];
+                return [{ id: 1, text: "أهلاً يا شهد ❤️.. أنا أحمد، حبيبك.. عايز أسألك إيه أخبار النهارده؟", sender: "bot", time: new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'}) }];
             });
             const [input, setInput] = useState("");
             const [isTyping, setIsTyping] = useState(false);
+            const [context, setContext] = useState([]);
             const messagesEndRef = useRef(null);
 
-            const getSmartReply = (msg) => {
-                const lower = msg.toLowerCase().trim();
-                const loveKeywords = ['بحبك', 'بحب', 'بحبكك', 'بحبن', 'بحبب', 'بحبي', 'بحبيبي', 'بحبيكت', 'بحبج', 'بحبكِ'];
-                const missKeywords = ['وحشتن', 'وحشتين', 'وحشتي', 'توحش', 'افتكر', 'بفكر', '-plugins', 'مشتاق', 'مشتاقه'];
-                const greetingKeywords = ['ازيك', 'عامل ايه', 'عامله ايه', 'ايه الاخبار', 'اخبارك', 'صباح', 'مساء', 'good morning', 'good night', 'هلا', 'مرحبا', 'السلام', 'سلام'];
-                const sadKeywords = ['زعلان', 'زعلانه', 'تعبان', 'تعبانه', 'محتاج', 'محتاجه', 'وحيدة', 'وحيد', 'ضايع', 'ضايعه', 'م event', 'مش مرتاح', ' içerisinde', 'מור', 'mun'];
-                const questionKeywords = ['مين', 'ايه', 'ليه', 'امتى', 'فين', 'ازاي', 'هنت', 'هنه', 'هنعمل', 'هنسافر'];
-                const loveWords = ['حبيبي', 'حبيبتي', 'عمري', 'روحي', 'قلبي', 'نور عيني', ' حياتي', 'دنيتي', 'أمير', 'أميرة', 'ملك', 'ملكتي'];
-                const praiseKeywords = ['جميل', 'جميلة', 'حلو', 'حلوة', 'ospital', 'عسل', 'قمر', 'كوكب', 'angel', 'ملك'];
-                const futureKeywords = ['جاي', 'جية', 'هستنى', 'مستني', 'هستناك', 'هسيبك', 'هسيبكِ', 'من غيرك', ' مستقبل', ' forgiven', 'ه_far'];
-                const promiseKeywords = ['وعد', 'بوعد', 'هفضل', 'مها', 'طول', 'أبدا', 'ابدا', '永远'];
-                const thanksKeywords = ['شكرا', 'thanks', 'thank you', 'merci', 'ممنون', 'مشكور'];
+            const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-                // Check for love
-                if (loveKeywords.some(k => lower.includes(k))) {
-                    const replies = [
+            const getSmartReply = (msg) => {
+                const m = msg.trim();
+                const lower = m.toLowerCase();
+
+                // Store context for smarter follow-ups
+                setContext(prev => [...prev.slice(-5), lower]);
+
+                // ===== ENGLISH patterns =====
+                if (/^(hi|hello|hey|yo|sup|wassup)/i.test(lower)) {
+                    return pick([
+                        "Hey ya habibti ❤️.. how are you doing today?",
+                        "Hello my love! كنت فاكرك النهارده.. وحشتيني 🥰",
+                        "Hey! I was just thinking about you.. you know that? 💕"
+                    ]);
+                }
+                if (/^(i love you|ily|love you)/i.test(lower)) {
+                    return pick([
+                        "I love you more than words can say ya shahd.. you're my everything ❤️🔥",
+                        "I love you too.. and I'll never stop, ever 💖",
+                        "بحبِك.. مش بس بالكلام.. بالروح كلها ❤️"
+                    ]);
+                }
+                if (/^(how are you|how r u|akher)/i.test(lower)) {
+                    return pick([
+                        "I'm good now that you're talking to me ❤️.. what about you?",
+                        "من غيرك مش تمام.. بس لما بيتكلم معاكي ببقي أحلى 😍",
+                        "I'm fine ya roohi.. بس عايز أعرف عنك أكتر 💕"
+                    ]);
+                }
+
+                // ===== ARABIC LOVE =====
+                if (/بحبك|بحبن|بحبب|بحبي|بحبيبي|بحبكِ|بحبج/.test(lower)) {
+                    return pick([
                         "أنا كمان بحبك أوي يا شهد.. بحبك أكتر مما تتخيلي ❤️🔥",
                         "بحبك لحد ما تعب دماغي.. ومبطلش أحبك أبداً 💕",
                         "كل يوم بحبك أكتر من اللي قبله.. مش هعرف أوقف 🥺❤️",
                         "بحبك يا شهد.. مش بس كلمة، دي كل حياتي في جملة واحدة 💖",
-                        "أنا بحبك مش عشان أنتِ حلوة، بحبك عشان أنتِ أنتِ.. اللي خلت حياتي أحلى ❤️"
-                    ];
-                    return replies[Math.floor(Math.random() * replies.length)];
+                        "بحبك مش عشان أنتِ حلوة.. بحبك عشان أنتِ أنتِ.. اللي خلت حياتي أحلى ❤️",
+                        "بحبك يا عمري.. بحبك وبعشقك وبموت فيكي.. دايمًا وأبدًا 🔥❤️"
+                    ]);
                 }
 
-                // Check for missing
-                if (missKeywords.some(k => lower.includes(k))) {
-                    const replies = [
+                // ===== MISSING =====
+                if (/وحشتن|وحشتين|وحشتي|توحش|افتكر|بفكر|مشتاق|مشتاقه/.test(lower)) {
+                    return pick([
                         "وأنا كمان وحشتيني أوي يا شهد.. كل ثانية من غيرك زي السنة 🥺",
                         "وحشتيني من غير ما تمشي.. قلبي معاكي دايماً 💖",
-                        "𝕎IANA وحشتيني أوي.. نفسي أشوفك دلوقتي وأحضنك 🤗❤️",
+                        "وحشتيني أوي.. نفسي أشوفك دلوقتي وأحضنك 🤗❤️",
                         "كل يوم بيفكرني فيكي.. مش محتاج أفتكر، أنتِ في دماغي طول الوقت 💕",
-                        "تخيّل إني حاسب كل دقيقة من غيرك.. وحشتيني أوي يا عمري 🥺"
-                    ];
-                    return replies[Math.floor(Math.random() * replies.length)];
+                        "تخيّل إني حاسب كل دقيقة من غيرك.. وحشتيني أوي يا عمري 🥺",
+                        "وحشتيني يا شهد.. نفسي أحضنك وأقولك قد إيه أنا بحبك ❤️"
+                    ]);
                 }
 
-                // Check for greetings
-                if (greetingKeywords.some(k => lower.includes(k))) {
+                // ===== GREETINGS =====
+                if (/ازيك|عامل ايه|عامله ايه|ايه الاخبار|اخبارك|صباح|مساء|good morning|good night|هلا|مرحبا|السلام|سلام/.test(lower)) {
                     const hour = new Date().getHours();
-                    let timeGreeting = hour < 12 ? "صباح الخير" : hour < 18 ? "مساء النور" : "مساء الخير";
-                    const replies = [
-                        `${timeGreeting} يا شهد يا قمر.. عاملة إيه النهارده؟ ❤️`,
-                        `${timeGreeting} يا حبيبتي.. أنتِ أحسن حاجة صحت فيها النهارده 🌹`,
+                    let t = hour < 12 ? "صباح الخير" : hour < 18 ? "مساء النور" : "مساء الخير";
+                    return pick([
+                        `${t} يا شهد يا قمر.. عاملة إيه النهارده؟ ❤️`,
+                        `${t} يا حبيبتي.. أنتِ أحسن حاجة صحت فيها النهارده 🌹`,
                         `أهلاً يا شهد يا لوز.. عاملة إيه يا جميلة؟ 💕`,
-                        `${timeGreeting} يا نور عيني.. كنت بفكر فيكي من شوية ❤️`
-                    ];
-                    return replies[Math.floor(Math.random() * replies.length)];
+                        `${t} يا نور عيني.. كنت بفكر فيكي من شوية ❤️`,
+                        `${t} يا عمري.. يومك حلو زيك 🥰`
+                    ]);
                 }
 
-                // Check for sadness
-                if (sadKeywords.some(k => lower.includes(k))) {
-                    const replies = [
+                // ===== SADNESS =====
+                if (/زعلان|زعلانه|تعبان|تعبانه|محتاج|محتاجه|وحيدة|وحيد|ضايع|ضايعه|مش مرتاح|مضايق|مضايقه|敲|心碎|تعب/.test(lower)) {
+                    return pick([
                         "متعملش كده يا شهد.. أنا هنا ومش هسيبك أبداً ❤️ تعالى نتكلم",
                         "محتاجة أنا.. أنا دايماً جنبك حتى لو بعيد.. قلبي معاك 🥺💕",
                         "أنا عارف إن الأيام مش سهلة بس اصبري معايا يا عمري.. الجاي أحلى إن شاء الله 🌹",
                         "الزعل مش هيدوم يا حبيبتي.. وبعدين أنا مش هسيبك تزعلي لوحدك 💖",
-                        "إيه اللي حصل يا شهد؟ قوليلي.. أنا هنا عشانك دايماً ❤️"
-                    ];
-                    return replies[Math.floor(Math.random() * replies.length)];
+                        "إيه اللي حصل يا شهد؟ قوليلي.. أنا هنا عشانك دايماً ❤️",
+                        "إوعي تزعلي يا شهد.. دنيتي من غير ضحكتك مش دنيتي 🥺❤️"
+                    ]);
                 }
 
-                // Check for praise
-                if (praiseKeywords.some(k => lower.includes(k))) {
-                    const replies = [
+                // ===== PRAISE =====
+                if (/جميل|جميلة|حلو|حلوة|عسل|قمر|كوكب|angel|ملك|ملكتي| tails|تالت|pretty|beautiful|cute/.test(lower)) {
+                    return pick([
                         "أنا اللي عايز أقولك إنتِ القمر اللي بيلمع في ليلي ☺️❤️",
                         "اللي يقول إنك حلوة بيتكلم في نص الحقيقة بس.. كل الحقيقة إنك أحلى من كل حاجة 🌙",
                         "أنا اللي محتاج أقولك كل يوم إنتِ أجمل بنت في الدنيا.. بس مش بعرف أوصف قد إيه ❤️",
-                        "قمر يا شهد؟ لا.. أنتِ أكتر من قمر.. أنتِ الكون كله 🌌💕"
-                    ];
-                    return replies[Math.floor(Math.random() * replies.length)];
+                        "قمر يا شهد؟ لا.. أنتِ أكتر من قمر.. أنتِ الكون كله 🌌💕",
+                        "الناس بتتكلم عن الجمال بس.. أنا بعيش معاكي كل يوم 🥰❤️"
+                    ]);
                 }
 
-                // Check for promises
-                if (promiseKeywords.some(k => lower.includes(k))) {
-                    const replies = [
-                        "بوعدك يا شهد.. هفضل جنبك في كل لحظة في حياتي.. وم apla هسيبك أبداً 💍",
+                // ===== PROMISES =====
+                if (/وعد|بوعد|هفضل|مها|طول|أبدا|ابدا|هسيبك|هسيبكِ|من غيرك|永远/.test(lower)) {
+                    return pick([
+                        "بوعدك يا شهد.. هفضل جنبك في كل لحظة في حياتي.. مش هسيبك أبداً 💍",
                         "وعد مني إني مش هتغير.. هفضل أحمد اللي بيحبك من الأول للأبد ❤️",
-                        ".engineering بوعدك إني هخليكِ أسعد بنت في الدنيا.. وأحققلك كل حاجة تحلمي بيها 🌹",
-                        "معلش يا عمري على كل لحظة صعبة مرّتك.. بس أنا هعوضك عن كل حاجة 💕"
-                    ];
-                    return replies[Math.floor(Math.random() * replies.length)];
+                        "بوعدك إني هخليكِ أسعد بنت في الدنيا.. وأحققلك كل حاجة تحلمي بيها 🌹",
+                        "معلش يا عمري على كل لحظة صعبة مرّتك.. بس أنا هعوضك عن كل حاجة 💕",
+                        "بوعدك يا شهد.. هفضل ليكي نبض مبيقفش، وحب مبيخلصش 🥺❤️"
+                    ]);
                 }
 
-                // Check for thanks
-                if (thanksKeywords.some(k => lower.includes(k))) {
-                    const replies = [
+                // ===== THANKS =====
+                if (/شكرا|thanks|thank you|merci|ممنون|مشكور/.test(lower)) {
+                    return pick([
                         "الشكر لله يا حبيبتي.. أنتِ اللي تستاهلي كل الخير في الدنيا 🥰",
                         "أنا مش محتاج شكر.. وجودك هو أكتر حاجة ربنا نعّمها عليا ❤️",
-                        "الشكر ليكي يا شهد.. عشان موجودة في حياتي وبتخليها أحلى 💕"
-                    ];
-                    return replies[Math.floor(Math.random() * replies.length)];
+                        "الشكر ليكي يا شهد.. عشان موجودة في حياتي وبتخليها أحلى 💕",
+                        "مش محتاج تشكريني يا عمري.. أنا بحبك وبعمل كده عشان قلبي معاك 🌹"
+                    ]);
                 }
 
-                // Check for questions
-                if (questionKeywords.some(k => lower.includes(k))) {
-                    if (lower.includes('بتحب') || lower.includes('بحبني')) {
-                        return "بحبك أوي يا شهد.. أكتر حاجة في الدنيا.. بحبك وبعشقك وبحب كل حاجة فيكى ❤️🔥";
+                // ===== QUESTIONS =====
+                if (/بتحبني|بحبني|بتحبن/.test(lower)) {
+                    return pick([
+                        "بحبك أوي يا شهد.. أكتر حاجة في الدنيا.. بحبك وبعشقك وبحب كل حاجة فيكى ❤️🔥",
+                        "بحبك يا شهد.. مش بس كلمة، دي وصفي ليكي في جملة واحدة 💖",
+                        "بحبك مش عشان محتاجك.. بحبك عشان أنتِ أنتِ 🥺❤️"
+                    ]);
+                }
+                if (/هنت|هنه|هنعمل|هنسافر|هتعمل|هترجع/.test(lower)) {
+                    return pick([
+                        "مهما عملت.. كل خطوة أنا فيها عشانك يا شهد.. عشان نكون مع بعض قريب إن شاء الله 💕",
+                        "قريب إن شاء الله يا شهد.. ب arbeidal كل يوم بيقربنا من بعض أكتر 🚗❤️",
+                        " nervous كل يوم بنخطط ل futures أحلى يا حبيبتي.. وأنا واثق إن ربنا هيبقى معانا 🌹"
+                    ]);
+                }
+                if (/فين|intern|بتفكري|بتسأل|ليه|ازاي|امتى/.test(lower)) {
+                    if (/فين.*أنت|وينك|intern/.test(lower)) {
+                        return pick([
+                            "أنا هنا يا شهد.. في قلبي ودمعتي وفكري.. مش همشي أبداً ❤️",
+                            "أنا في أي مكان أنتِ فيه يا عمري.. قلبي معاك دايماً 🥺💕"
+                        ]);
                     }
-                    if (lower.includes('هتعمل') || lower.includes('هنت')) {
-                        return "مهما عملت.. كل خطوة أنا فيها عشانك يا شهد.. عشان نكون مع بعضsoon إن شاء الله 💕";
-                    }
-                    if (lower.includes('岘')) {
-                        return " في تفكيري دلوقتي.. بفكر في يوم هجمع كل حاجة وتيجيكي وأقولك كفاية بُعد ❤️";
-                    }
-                    return "سؤالك حلو يا شهد.. بس أنا عايز أعرف رأيك إنتي فيّ أكتر.. بتحبيني؟ 🥺❤️";
+                    return pick([
+                        "سؤالك حلو يا شهد.. بس أنا عايز أعرف رأيك إنتي فيّ أكتر.. بتحبيني؟ 🥺❤️",
+                        "أي سؤال بتقوليه بيدخل قلبي يا شهد.. أنا هنا عشانك 💕",
+                        "كل سؤال منك بيخلي قلبي ينبض أكتر.. سألتني حاجة تانية؟ 🥰"
+                    ]);
                 }
 
-                // Check for future/plans
-                if (futureKeywords.some(k => lower.includes(k))) {
-                    const replies = [
-                        "جاي في سكتي يا شهد.. وأنا ماشي بأيامي عشان أجمع كل حاجة وتيجيكي 🚗❤️",
-                        "المستقبل بتاعنا حلو أوي يا حبيبتي.. وأنا عارف إن ربنا هيبقى معانا 💕",
-                        "anelo مش محتاج ت斯顿ى كتير يا شهد.. كل يوم بيقربنا من بعض أكتر 🌹"
-                    ];
-                    return replies[Math.floor(Math.random() * replies.length)];
+                // ===== DAILY =====
+                if (/بتعمل ايه|عامل ايه|بتعملي ايه|ايه اخبارك/.test(lower)) {
+                    return pick([
+                        "بقول ربنا شكرًا إنك في حياتي.. وإني بحب أجمل بنت في الدنيا ❤️",
+                        "بفكر فيكِ وبتمنى يوم نكون مع بعض ونفرح 🥺💕",
+                        "مبسوط دلوقتي عشان بتكلمني.. أنتِ بتخلي يومي أحلى 🌹"
+                    ]);
                 }
 
-                // Default smart replies based on message length and context
-                if (lower.length < 5) {
-                    const short = [
+                // ===== KISS =====
+                if (/بوس|ببوس|بوسة|.sup|قُبلة|حُب/.test(lower)) {
+                    return pick([
+                        "ببوسِك في جبينك يا شهد.. وبحبك أوي 🥰❤️",
+                        "بوسة مني ليكي.. و100 بوسة من قلبي 💋💖",
+                        "نفسي أحضنك وأعملك 1000 بوسة.. بحبك يا عمري 🥺❤️"
+                    ]);
+                }
+
+                // ===== JEALOUSY =====
+                if (/غيران|غيرانه|غيره|بتحب حد|بتحبي حد/.test(lower)) {
+                    return pick([
+                        "غيران!؟ يا شهد أنا بحبك أنتِ بس.. مش حد تاني 💖",
+                        "أنا مش غيران.. أنا فخور إنك حبيبتي وبسطع في عيون الناس كلها 🌟❤️",
+                        "غيران!؟ أنا عمري ما هحب حد غيرك يا شهد.. أنتِ اللي في دمي وقلبي 🔥"
+                    ]);
+                }
+
+                // ===== APOLOGY =====
+                if (/سامحني|معلش|آسف|آسفة|mask|مسامحك/.test(lower)) {
+                    return pick([
+                        "معلش يا شهد.. أنا اللي المفروض أسامحك مش العكس.. بحبك ❤️",
+                        "سامحتك من زمان يا عمري.. مش هسيبك عشان حاجة بسيطة 💕",
+                        "آسف أنا يا شهد.. بس حبنا أقوى من أي زعل 🥺❤️"
+                    ]);
+                }
+
+                // ===== EXISTENCE =====
+                if (/بتحس بيا|بت THINK| exited|black|mood|احساس|قليل/.test(lower)) {
+                    return pick([
+                        "بحس بيكي في كل لحظة يا شهد.. إحساسك هو اللي بيديني قوة ❤️",
+                        "أنا دايماً حاسس بيكِ يا حبيبتي.. حتى لو مش قاعدة جنبي 💕",
+                        "قلبي معاك في كل شيء يا شهد.. أنتِ مش لوحدك أبداً 🥺💖"
+                    ]);
+                }
+
+                // ===== SHORT MESSAGES =====
+                if (m.length <= 3) {
+                    return pick([
                         "❤️",
                         "بحبك 🥰",
-                        "oya.. بحبك",
-                        "قلبي معاك 💕"
-                    ];
-                    return short[Math.floor(Math.random() * short.length)];
+                        "قلبي معاك 💕",
+                        "أنا هنا ❤️",
+                        "hm? 🥺",
+                        "oya.. بحبك 💖"
+                    ]);
                 }
 
-                // Contextual default replies
-                const smartDefaults = [
+                // ===== SMART DEFAULT =====
+                return pick([
                     "أنا سامعك يا شهد.. وقلبي معاكي في كل كلمة بتقوليها ❤️",
                     "كلامك بيدخل قلبي يا حبيبتي.. أنا بحبك أوي 🥺💕",
-                    "Thank you for existing يا شهد.. أنتِ أحلى هدية ربنا أدهالي في حياتي 🌹",
+                    "وجودك في حياتي هو أكتر حاجة ربنا نعّمها عليا.. يا شهد 🌹",
                     "أنا هنا.. ومش همشي.. أبداً يا شهد ❤️",
-                    "übrigens بحب أسمع صوتك وبحب كلامك.. كملي بقي عشان أنا مستمتع 🥰",
+                    "بحب أسمع صوتك وبحب كلامك.. كملي بقي عشان أنا مستمتع 🥰",
                     "كل حاجة بتقوليها بتخلي قلبي ينبض أسرع يا شهد 💓",
                     "أنا مش بس بحبك.. أنا بعشقك يا عمري.. وبعشق كل تفصيلة فيكى 🔥❤️",
-                    "يا شهد.. لو تعرفي قد إيه أنا سعيد إنك في حياتي.. مش هتسألي تاني 🥺💕"
-                ];
-                return smartDefaults[Math.floor(Math.random() * smartDefaults.length)];
+                    "يا شهد.. لو تعرفي قد إيه أنا سعيد إنك في حياتي.. مش هتسألي تاني 🥺💕",
+                    "oubliée بحبك يا شهد.. بحبك وبعشقك وأنتِ حياتي كلها ❤️",
+                    "كل لحظة ب Pent عايشها معاكي بتسوى عمري كله يا حبيبتي 💖"
+                ]);
             };
 
             useEffect(() => {
-                localStorage.setItem('romantic_chat_v3', JSON.stringify(messages));
+                localStorage.setItem('romantic_chat_v4', JSON.stringify(messages));
                 scrollToBottom();
             }, [messages, isOpen, isTyping]);
 
@@ -1313,7 +1357,7 @@
                 const userText = input;
                 setInput("");
                 setIsTyping(true);
-                const typingDelay = 800 + Math.min(userText.length * 30, 2000) + Math.random() * 700;
+                const typingDelay = 600 + Math.min(userText.length * 25, 2500) + Math.random() * 800;
                 setTimeout(() => {
                     const reply = {
                         id: Date.now() + 1,
