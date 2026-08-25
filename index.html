@@ -1087,27 +1087,159 @@
         function BotChat() {
             const [isOpen, setIsOpen] = useState(false);
             const [messages, setMessages] = useState(() => {
-                const saved = localStorage.getItem('romantic_chat_v2');
-                if (saved) {
-                    try { return JSON.parse(saved); } catch(e) {}
-                }
-                return [{ id: 1, text: "يا روح قلبي أنتِ ❤️.. وحشتيني أوي، كنت لسة بفكر فيكي!", sender: "bot", time: new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'}) }];
+                const saved = localStorage.getItem('romantic_chat_v3');
+                if (saved) { try { return JSON.parse(saved); } catch(e) {} }
+                return [{ id: 1, text: "أهلاً يا شهد ❤️.. أحمد بيفكر فيكي دلوقتي وعايز يقولك إنك أجمل حاجة في حياته!", sender: "bot", time: new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'}) }];
             });
             const [input, setInput] = useState("");
             const [isTyping, setIsTyping] = useState(false);
             const messagesEndRef = useRef(null);
 
-            const botReplies = [
-                "بموت فيكي يا صدفة عمري الحلوة 🥺❤️",
-                "وحشتيني من قبل حتى ما تمشي ✨",
-                "أنتي دنيتي وكل حاجة ليا في الدنيا دي 🌍",
-                "كفاية عليا إنك معايا يا شهد قلبي 😍",
-                "بحب تفاصيلك وكلامك وحتى سكوتك 💍",
-                "كل لحظة معاكي بتسوى عمري كله 💖"
-            ];
+            const getSmartReply = (msg) => {
+                const lower = msg.toLowerCase().trim();
+                const loveKeywords = ['بحبك', 'بحب', 'بحبكك', 'بحبن', 'بحبب', 'بحبي', 'بحبيبي', 'بحبيكت', 'بحبج', 'بحبكِ'];
+                const missKeywords = ['وحشتن', 'وحشتين', 'وحشتي', 'توحش', 'افتكر', 'بفكر', '-plugins', 'مشتاق', 'مشتاقه'];
+                const greetingKeywords = ['ازيك', 'عامل ايه', 'عامله ايه', 'ايه الاخبار', 'اخبارك', 'صباح', 'مساء', 'good morning', 'good night', 'هلا', 'مرحبا', 'السلام', 'سلام'];
+                const sadKeywords = ['زعلان', 'زعلانه', 'تعبان', 'تعبانه', 'محتاج', 'محتاجه', 'وحيدة', 'وحيد', 'ضايع', 'ضايعه', 'م event', 'مش مرتاح', ' içerisinde', 'מור', 'mun'];
+                const questionKeywords = ['مين', 'ايه', 'ليه', 'امتى', 'فين', 'ازاي', 'هنت', 'هنه', 'هنعمل', 'هنسافر'];
+                const loveWords = ['حبيبي', 'حبيبتي', 'عمري', 'روحي', 'قلبي', 'نور عيني', ' حياتي', 'دنيتي', 'أمير', 'أميرة', 'ملك', 'ملكتي'];
+                const praiseKeywords = ['جميل', 'جميلة', 'حلو', 'حلوة', 'ospital', 'عسل', 'قمر', 'كوكب', 'angel', 'ملك'];
+                const futureKeywords = ['جاي', 'جية', 'هستنى', 'مستني', 'هستناك', 'هسيبك', 'هسيبكِ', 'من غيرك', ' مستقبل', ' forgiven', 'ه_far'];
+                const promiseKeywords = ['وعد', 'بوعد', 'هفضل', 'مها', 'طول', 'أبدا', 'ابدا', '永远'];
+                const thanksKeywords = ['شكرا', 'thanks', 'thank you', 'merci', 'ممنون', 'مشكور'];
+
+                // Check for love
+                if (loveKeywords.some(k => lower.includes(k))) {
+                    const replies = [
+                        "أنا كمان بحبك أوي يا شهد.. بحبك أكتر مما تتخيلي ❤️🔥",
+                        "بحبك لحد ما تعب دماغي.. ومبطلش أحبك أبداً 💕",
+                        "كل يوم بحبك أكتر من اللي قبله.. مش هعرف أوقف 🥺❤️",
+                        "بحبك يا شهد.. مش بس كلمة، دي كل حياتي في جملة واحدة 💖",
+                        "أنا بحبك مش عشان أنتِ حلوة، بحبك عشان أنتِ أنتِ.. اللي خلت حياتي أحلى ❤️"
+                    ];
+                    return replies[Math.floor(Math.random() * replies.length)];
+                }
+
+                // Check for missing
+                if (missKeywords.some(k => lower.includes(k))) {
+                    const replies = [
+                        "وأنا كمان وحشتيني أوي يا شهد.. كل ثانية من غيرك زي السنة 🥺",
+                        "وحشتيني من غير ما تمشي.. قلبي معاكي دايماً 💖",
+                        "𝕎IANA وحشتيني أوي.. نفسي أشوفك دلوقتي وأحضنك 🤗❤️",
+                        "كل يوم بيفكرني فيكي.. مش محتاج أفتكر، أنتِ في دماغي طول الوقت 💕",
+                        "تخيّل إني حاسب كل دقيقة من غيرك.. وحشتيني أوي يا عمري 🥺"
+                    ];
+                    return replies[Math.floor(Math.random() * replies.length)];
+                }
+
+                // Check for greetings
+                if (greetingKeywords.some(k => lower.includes(k))) {
+                    const hour = new Date().getHours();
+                    let timeGreeting = hour < 12 ? "صباح الخير" : hour < 18 ? "مساء النور" : "مساء الخير";
+                    const replies = [
+                        `${timeGreeting} يا شهد يا قمر.. عاملة إيه النهارده؟ ❤️`,
+                        `${timeGreeting} يا حبيبتي.. أنتِ أحسن حاجة صحت فيها النهارده 🌹`,
+                        `أهلاً يا شهد يا لوز.. عاملة إيه يا جميلة؟ 💕`,
+                        `${timeGreeting} يا نور عيني.. كنت بفكر فيكي من شوية ❤️`
+                    ];
+                    return replies[Math.floor(Math.random() * replies.length)];
+                }
+
+                // Check for sadness
+                if (sadKeywords.some(k => lower.includes(k))) {
+                    const replies = [
+                        "متعملش كده يا شهد.. أنا هنا ومش هسيبك أبداً ❤️ تعالى نتكلم",
+                        "محتاجة أنا.. أنا دايماً جنبك حتى لو بعيد.. قلبي معاك 🥺💕",
+                        "أنا عارف إن الأيام مش سهلة بس اصبري معايا يا عمري.. الجاي أحلى إن شاء الله 🌹",
+                        "الزعل مش هيدوم يا حبيبتي.. وبعدين أنا مش هسيبك تزعلي لوحدك 💖",
+                        "إيه اللي حصل يا شهد؟ قوليلي.. أنا هنا عشانك دايماً ❤️"
+                    ];
+                    return replies[Math.floor(Math.random() * replies.length)];
+                }
+
+                // Check for praise
+                if (praiseKeywords.some(k => lower.includes(k))) {
+                    const replies = [
+                        "أنا اللي عايز أقولك إنتِ القمر اللي بيلمع في ليلي ☺️❤️",
+                        "اللي يقول إنك حلوة بيتكلم في نص الحقيقة بس.. كل الحقيقة إنك أحلى من كل حاجة 🌙",
+                        "أنا اللي محتاج أقولك كل يوم إنتِ أجمل بنت في الدنيا.. بس مش بعرف أوصف قد إيه ❤️",
+                        "قمر يا شهد؟ لا.. أنتِ أكتر من قمر.. أنتِ الكون كله 🌌💕"
+                    ];
+                    return replies[Math.floor(Math.random() * replies.length)];
+                }
+
+                // Check for promises
+                if (promiseKeywords.some(k => lower.includes(k))) {
+                    const replies = [
+                        "بوعدك يا شهد.. هفضل جنبك في كل لحظة في حياتي.. وم apla هسيبك أبداً 💍",
+                        "وعد مني إني مش هتغير.. هفضل أحمد اللي بيحبك من الأول للأبد ❤️",
+                        ".engineering بوعدك إني هخليكِ أسعد بنت في الدنيا.. وأحققلك كل حاجة تحلمي بيها 🌹",
+                        "معلش يا عمري على كل لحظة صعبة مرّتك.. بس أنا هعوضك عن كل حاجة 💕"
+                    ];
+                    return replies[Math.floor(Math.random() * replies.length)];
+                }
+
+                // Check for thanks
+                if (thanksKeywords.some(k => lower.includes(k))) {
+                    const replies = [
+                        "الشكر لله يا حبيبتي.. أنتِ اللي تستاهلي كل الخير في الدنيا 🥰",
+                        "أنا مش محتاج شكر.. وجودك هو أكتر حاجة ربنا نعّمها عليا ❤️",
+                        "الشكر ليكي يا شهد.. عشان موجودة في حياتي وبتخليها أحلى 💕"
+                    ];
+                    return replies[Math.floor(Math.random() * replies.length)];
+                }
+
+                // Check for questions
+                if (questionKeywords.some(k => lower.includes(k))) {
+                    if (lower.includes('بتحب') || lower.includes('بحبني')) {
+                        return "بحبك أوي يا شهد.. أكتر حاجة في الدنيا.. بحبك وبعشقك وبحب كل حاجة فيكى ❤️🔥";
+                    }
+                    if (lower.includes('هتعمل') || lower.includes('هنت')) {
+                        return "مهما عملت.. كل خطوة أنا فيها عشانك يا شهد.. عشان نكون مع بعضsoon إن شاء الله 💕";
+                    }
+                    if (lower.includes('岘')) {
+                        return " في تفكيري دلوقتي.. بفكر في يوم هجمع كل حاجة وتيجيكي وأقولك كفاية بُعد ❤️";
+                    }
+                    return "سؤالك حلو يا شهد.. بس أنا عايز أعرف رأيك إنتي فيّ أكتر.. بتحبيني؟ 🥺❤️";
+                }
+
+                // Check for future/plans
+                if (futureKeywords.some(k => lower.includes(k))) {
+                    const replies = [
+                        "جاي في سكتي يا شهد.. وأنا ماشي بأيامي عشان أجمع كل حاجة وتيجيكي 🚗❤️",
+                        "المستقبل بتاعنا حلو أوي يا حبيبتي.. وأنا عارف إن ربنا هيبقى معانا 💕",
+                        "anelo مش محتاج ت斯顿ى كتير يا شهد.. كل يوم بيقربنا من بعض أكتر 🌹"
+                    ];
+                    return replies[Math.floor(Math.random() * replies.length)];
+                }
+
+                // Default smart replies based on message length and context
+                if (lower.length < 5) {
+                    const short = [
+                        "❤️",
+                        "بحبك 🥰",
+                        "oya.. بحبك",
+                        "قلبي معاك 💕"
+                    ];
+                    return short[Math.floor(Math.random() * short.length)];
+                }
+
+                // Contextual default replies
+                const smartDefaults = [
+                    "أنا سامعك يا شهد.. وقلبي معاكي في كل كلمة بتقوليها ❤️",
+                    "كلامك بيدخل قلبي يا حبيبتي.. أنا بحبك أوي 🥺💕",
+                    "Thank you for existing يا شهد.. أنتِ أحلى هدية ربنا أدهالي في حياتي 🌹",
+                    "أنا هنا.. ومش همشي.. أبداً يا شهد ❤️",
+                    "übrigens بحب أسمع صوتك وبحب كلامك.. كملي بقي عشان أنا مستمتع 🥰",
+                    "كل حاجة بتقوليها بتخلي قلبي ينبض أسرع يا شهد 💓",
+                    "أنا مش بس بحبك.. أنا بعشقك يا عمري.. وبعشق كل تفصيلة فيكى 🔥❤️",
+                    "يا شهد.. لو تعرفي قد إيه أنا سعيد إنك في حياتي.. مش هتسألي تاني 🥺💕"
+                ];
+                return smartDefaults[Math.floor(Math.random() * smartDefaults.length)];
+            };
 
             useEffect(() => {
-                localStorage.setItem('romantic_chat_v2', JSON.stringify(messages));
+                localStorage.setItem('romantic_chat_v3', JSON.stringify(messages));
                 scrollToBottom();
             }, [messages, isOpen, isTyping]);
 
@@ -1117,28 +1249,27 @@
 
             const handleSend = () => {
                 if (!input.trim()) return;
-                
                 const newMsg = {
                     id: Date.now(),
                     text: input,
                     sender: "user",
                     time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'})
                 };
-                
                 setMessages(prev => [...prev, newMsg]);
+                const userText = input;
                 setInput("");
                 setIsTyping(true);
-                
+                const typingDelay = 800 + Math.min(userText.length * 30, 2000) + Math.random() * 700;
                 setTimeout(() => {
                     const reply = {
                         id: Date.now() + 1,
-                        text: botReplies[Math.floor(Math.random() * botReplies.length)],
+                        text: getSmartReply(userText),
                         sender: "bot",
                         time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'})
                     };
                     setMessages(prev => [...prev, reply]);
                     setIsTyping(false);
-                }, 1500 + Math.random() * 1500);
+                }, typingDelay);
             };
 
             const deleteMessage = (id) => {
@@ -1147,7 +1278,7 @@
 
             const clearChat = () => {
                 if(confirm("هل أنت متأكد من مسح جميع الرسائل؟")) {
-                    setMessages([{ id: 1, text: "مهما مسحت الرسايل حبنا هيفضل محفور في قلبي للأبد 🥺❤️", sender: "bot", time: new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'}) }]);
+                    setMessages([{ id: 1, text: "مسحت الرسائل بس مش همسح حبنا.. ده محفور في قلبي للأبد 🥺❤️", sender: "bot", time: new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'}) }]);
                 }
             };
 
@@ -1210,7 +1341,7 @@
                                         value={input}
                                         onChange={(e) => setInput(e.target.value)}
                                         onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                                        placeholder="اكتب رسالة لحبيبك..."
+                                        placeholder="اكتب لأحمد أي حاجة.."
                                         className="flex-1 outline-none border-none bg-transparent text-slate-800 placeholder-slate-400 text-sm md:text-base w-full"
                                     />
                                 </div>
