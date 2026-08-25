@@ -1,18 +1,17 @@
-const CACHE_NAME = 'woo-qalbi-v1';
+const CACHE_NAME = 'nabd-alqalb-v1';
+const BASE = '/shahd-and-ahmed/';
 const urlsToCache = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icon-192.jpeg',
-  './icon-512.jpeg',
-  './assets/media/song.mp3',
-  './assets/media/video_new.mp4',
-  './assets/media/img1.jpeg',
-  './assets/media/img2.jpeg',
-  './assets/media/img3.jpeg',
-  './assets/media/img4.jpeg',
-  './assets/media/img5.jpeg',
-  './assets/media/img6.jpeg'
+  BASE,
+  BASE + 'index.html',
+  BASE + 'manifest.json',
+  BASE + 'assets/media/img1.jpeg',
+  BASE + 'assets/media/img2.jpeg',
+  BASE + 'assets/media/img3.jpeg',
+  BASE + 'assets/media/img4.jpeg',
+  BASE + 'assets/media/img5.jpeg',
+  BASE + 'assets/media/img6.jpeg',
+  BASE + 'assets/media/song.mp3',
+  BASE + 'assets/media/video_new.mp4'
 ];
 
 self.addEventListener('install', event => {
@@ -40,6 +39,6 @@ self.addEventListener('fetch', event => {
           return fetchResponse;
         });
       });
-    }).catch(() => caches.match('./index.html'))
+    }).catch(() => caches.match(BASE + 'index.html'))
   );
 });
