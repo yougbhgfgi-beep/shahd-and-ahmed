@@ -1,4 +1,4 @@
-const CACHE_NAME = 'love-v8';
+const CACHE_NAME = 'love-final-v1';
 
 self.addEventListener('install', () => self.skipWaiting());
 
@@ -10,7 +10,5 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request))
-  );
+  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
 });

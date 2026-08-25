@@ -422,7 +422,7 @@
             const audioRef = useRef(null);
             
             const playlist = [
-                "./assets/media/song.mp3"
+                "./assets/media/song.mp3?v=101"
             ];
             const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
@@ -569,7 +569,7 @@
                             }}></div>
                         ))}
                         <video autoPlay muted loop playsInline className="video-bg">
-                            <source src="./assets/media/video_new.mp4" type="video/mp4" />
+                            <source src="./assets/media/video_new.mp4?v=101" type="video/mp4" />
                         </video>
                         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/40 to-slate-950/90 backdrop-blur-sm"></div>
 
@@ -691,12 +691,12 @@
                         <div className="max-w-5xl mx-auto px-6 relative">
                             <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-800 hidden md:block rounded-full"></div>
                             {[
-                                { t: "أجمل بداية", d: "من أول لحظة شوفتك عرفت إنك هي اللي ربنا كاتبها ليا.. لحظة غيّرت كل حاجة في حياتي ❤️", img: "./assets/media/img1.jpeg" },
-                                { t: "نور عيني", d: "كل دقة في قلبي بتنده باسمك.. أنتِ حبيبتي ونور عيني كلها 🌹", img: "./assets/media/img2.jpeg" },
-                                { t: "ضحكتك", d: "لما بتضحكي الدنيا كلها بتستنى.. ضحكتك هي اللي بتنور أيامي المظلمة 😍", img: "./assets/media/img3.jpeg" },
-                                { t: "وجودك", d: "وجودك في حياتي هو أكتر حاجة ربنا نعمها عليا بيها.. كفاية إنك موجودة 🌟", img: "./assets/media/img4.jpeg" },
-                                { t: "حنيتك", d: "طريقتك في حني وpreh.. بتخلي كل يوم أحلى من اللي قبله يا أحلى بنت في الدنيا 🥺", img: "./assets/media/img5.jpeg" },
-                                { t: "أحلى يوم", d: "كان أحلى يوم يا شهد ♥️ اليوم اللي اتجمعنا فيه واتصورنا.. ضحكتك فيه كانت بالدنيا وما فيها 😍🫶", img: "./assets/media/img6.jpeg" }
+                                { t: "أجمل بداية", d: "من أول لحظة شوفتك عرفت إنك هي اللي ربنا كاتبها ليا.. لحظة غيّرت كل حاجة في حياتي ❤️", img: "./assets/media/img1.jpeg?v=101" },
+                                { t: "نور عيني", d: "كل دقة في قلبي بتنده باسمك.. أنتِ حبيبتي ونور عيني كلها 🌹", img: "./assets/media/img2.jpeg?v=101" },
+                                { t: "ضحكتك", d: "لما بتضحكي الدنيا كلها بتستنى.. ضحكتك هي اللي بتنور أيامي المظلمة 😍", img: "./assets/media/img3.jpeg?v=101" },
+                                { t: "وجودك", d: "وجودك في حياتي هو أكتر حاجة ربنا نعمها عليا بيها.. كفاية إنك موجودة 🌟", img: "./assets/media/img4.jpeg?v=101" },
+                                { t: "حنيتك", d: "طريقتك في حني وpreh.. بتخلي كل يوم أحلى من اللي قبله يا أحلى بنت في الدنيا 🥺", img: "./assets/media/img5.jpeg?v=101" },
+                                { t: "أحلى يوم", d: "كان أحلى يوم يا شهد ♥️ اليوم اللي اتجمعنا فيه واتصورنا.. ضحكتك فيه كانت بالدنيا وما فيها 😍🫶", img: "./assets/media/img6.jpeg?v=101" }
                             ].map((item, i) => (
                                 <div key={i} className={`flex mb-24 flex-col md:flex-row ${i % 2 === 0 ? 'md:flex-row-reverse' : ''} items-center group`}>
                                     <div className="md:w-1/2 flex justify-center">
@@ -729,7 +729,7 @@
                                         onPause={handleVideoPause}
                                         onEnded={handleVideoPause}
                                     >
-                                        <source src="./assets/media/video_new.mp4" type="video/mp4" />
+                                        <source src="./assets/media/video_new.mp4?v=101" type="video/mp4" />
                                     </video>
                                 </div>
                                 <div className="absolute bottom-4 left-0 right-0 text-center text-xl md:text-2xl font-script text-rose-400 italic drop-shadow-md bg-black/40 py-2">"كل لحظة معاكي هي أحلى لحظة في حياتي"</div>
@@ -842,7 +842,7 @@
                 <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[110]" dir="rtl">
                     {!isOpen ? (
                         <div onClick={() => setIsOpen(true)} className="w-16 h-16 md:w-20 md:h-20 rounded-full shadow-[0_0_20px_rgba(225,29,72,0.6)] cursor-pointer flex items-center justify-center hover:scale-110 transition-transform animate-bounce border-2 border-white/20 overflow-hidden">
-                            <img src="./assets/media/img1.jpeg" alt="رسايل" className="w-full h-full object-cover" />
+                            <img src="./assets/media/img1.jpeg?v=101" alt="رسايل" className="w-full h-full object-cover" />
                         </div>
                     ) : (
                         <div className="bg-slate-900/95 backdrop-blur-xl p-6 rounded-3xl border border-rose-500/50 shadow-[0_15px_50px_rgba(0,0,0,0.8)] w-[85vw] max-w-sm text-center animate-fade-in relative">
@@ -1461,9 +1461,11 @@
     </script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/shahd-and-ahmed/sw2.js').then(reg => {
-                reg.update();
-            }).catch(() => {});
+            navigator.serviceWorker.getRegistrations().then(regs => {
+                regs.forEach(r => r.unregister());
+            });
+            caches.keys().then(names => names.forEach(n => caches.delete(n)));
+            navigator.serviceWorker.register('/shahd-and-ahmed/sw2.js').catch(() => {});
         }
     </script>
 </body>
