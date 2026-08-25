@@ -1,5 +1,5 @@
-const CACHE_NAME = 'nabd-alqalb-v1';
-const BASE = '/shahd-and-ahmed/';
+const CACHE_NAME = 'nabd-alqalb-v3';
+const BASE = 'https://yougbhgfgi-beep.github.io/shahd-and-ahmed/';
 const urlsToCache = [
   BASE,
   BASE + 'index.html',
