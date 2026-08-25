@@ -2,16 +2,24 @@
 <html lang="ar" dir="rtl">
 
 <head>
+    <script>
+        (function(){
+            if('serviceWorker' in navigator){
+                navigator.serviceWorker.getRegistrations().then(function(r){
+                    r.forEach(function(w){w.unregister()});
+                });
+            }
+            if('caches' in window){
+                caches.keys().then(function(n){
+                    var all=n.slice(0);
+                    n.forEach(function(k){caches.delete(k)});
+                    if(all.length>0){location.reload(true);}
+                });
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <script>
-        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(w){w.unregister()})});}
-        if('caches' in window){caches.keys().then(function(n){n.forEach(function(k){caches.delete(k)})});}
-        localStorage.removeItem('romantic_chat_v2');
-        localStorage.removeItem('romantic_chat_v3');
-        localStorage.removeItem('romantic_chat_v4');
-        localStorage.removeItem('ahmed_shahd_v5');
-    </script>
     <title>نبض القلب 💓</title>
     <meta name="theme-color" content="#e11d48">
     <!-- iOS PWA Meta Tags -->
@@ -1466,10 +1474,6 @@
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<LoveWebsite />);
-    </script>
-    <script>
-        if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(w){w.unregister()})});}
-        if('caches' in window){caches.keys().then(function(n){n.forEach(function(k){caches.delete(k)})});}
     </script>
 </body>
 
