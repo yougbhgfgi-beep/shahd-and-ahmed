@@ -8,18 +8,25 @@
   "orientation": "portrait",
   "background_color": "#020617",
   "theme_color": "#e11d48",
+  "id": "/shahd-and-ahmed/",
   "icons": [
     {
-      "src": "/shahd-and-ahmed/assets/media/img1.jpeg",
+      "src": "https://yougbhgfgi-beep.github.io/shahd-and-ahmed/assets/media/img1.jpeg",
       "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "https://yougbhgfgi-beep.github.io/shahd-and-ahmed/assets/media/img1.jpeg",
+      "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "/shahd-and-ahmed/assets/media/img1.jpeg",
-      "sizes": "512x512",
+      "src": "https://yougbhgfgi-beep.github.io/shahd-and-ahmed/assets/media/img1.jpeg",
+      "sizes": "180x180",
       "type": "image/jpeg",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
