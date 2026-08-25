@@ -2,7 +2,7 @@
   "name": "شهد",
   "short_name": "شهد",
   "description": "حبنا محفور في قلبي للأبد",
-  "start_url": "./index.html",
+  "start_url": "/shahd-and-ahmed/index.html",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#020617",
