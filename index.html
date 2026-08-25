@@ -1461,7 +1461,9 @@
     </script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/shahd-and-ahmed/sw.js').catch(() => {});
+            navigator.serviceWorker.register('/shahd-and-ahmed/sw2.js').then(reg => {
+                reg.update();
+            }).catch(() => {});
         }
     </script>
 </body>
