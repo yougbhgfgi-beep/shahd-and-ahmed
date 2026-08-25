@@ -1,4 +1,4 @@
-const CACHE_NAME = 'love-v6';
+const CACHE_NAME = 'love-v7';
 
 self.addEventListener('install', () => self.skipWaiting());
 
